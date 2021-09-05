@@ -20,7 +20,6 @@ export default React.forwardRef((props: ItemProps, ref) => {
     });
   };
   useImperativeHandle(ref, () => sortTableRef.current);
-  console.log(children);
   return React.createElement(
     nodeTag,
     { ...(warpProps || {}), ref: newSortable },
