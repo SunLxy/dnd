@@ -101,9 +101,14 @@ export const onEnd = (
         item.parentElement.appendChild(evt.item);
       }
     }
-  } else if (pullMode !== 'clone') {
+  } else if (pullMode === 'clone') {
+    // 克隆添加的 移除当前所在的位置
+    if (item.element && item.element.parentElement) {
+      item.element.parentElement.removeChild(item.element);
+    }
+  } else {
     // 不是内部排序 不是 克隆 添加
-    if (item.element.parentElement) {
+    if (item.element && item.element.parentElement) {
       item.element.parentElement.removeChild(item.element);
     }
     if (item.parentElement) {
@@ -113,11 +118,6 @@ export const onEnd = (
       } else {
         item.parentElement.appendChild(evt.item);
       }
-    }
-  } else {
-    // 克隆添加的 移除当前所在的位置
-    if (item.element.parentElement) {
-      item.element.parentElement.removeChild(item.element);
     }
   }
   if (

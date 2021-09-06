@@ -1,12 +1,12 @@
-import React, { useRef, useImperativeHandle } from 'react';
+import React, { useRef } from 'react';
 import Sortable from 'sortablejs';
-export interface ItemProps {
+export interface SortableProps {
   sortProps?: Sortable.Options;
   children?: React.ReactNode;
   nodeTag?: string;
   warpProps?: any;
 }
-export default React.forwardRef((props: ItemProps, ref) => {
+export default (props: SortableProps) => {
   const { sortProps, children, nodeTag = 'div', warpProps = {} } = props;
   const sortTableRef = useRef<Sortable>();
 
@@ -19,7 +19,6 @@ export default React.forwardRef((props: ItemProps, ref) => {
       ...(sortProps || {}),
     });
   };
-  useImperativeHandle(ref, () => sortTableRef.current);
   return React.createElement(
     nodeTag,
     { ...(warpProps || {}), ref: newSortable },
@@ -31,4 +30,4 @@ export default React.forwardRef((props: ItemProps, ref) => {
       }
     }),
   );
-});
+};
